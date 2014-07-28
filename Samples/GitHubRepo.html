@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<script type="text/javascript"src="../lib/GitHub.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<html>
+	<head>
+	</head>
+	<body>
+	<p id="repo"></p>
+
+<script>
+$(document).ready(function(){
+	var github = new Github({
+  		username: "BigBearGCU",
+  		password: "scotland1980",
+  		auth: "basic"
+	});
+
+	if (github==null)
+	{
+		document.getElementById("repo").innerHTML="Error";
+	}
+
+	var repo = github.getRepo("BigBearGCU", "GCU-GitHubViewer");
+	
+	if (repo==null)
+	{
+		document.getElementById("repo").innerHTML="Error";
+	}
+
+	repo.show(function(err, repo) {
+			document.getElementById("repo").innerHTML="Hello World";	
+	});
+
+	document.getElementById("repo").innerHTML="Something went wrong";
+
+});
+</script>	
+	</body>
+</html>

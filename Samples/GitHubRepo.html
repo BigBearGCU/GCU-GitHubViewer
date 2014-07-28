@@ -1,39 +1,29 @@
 <!DOCTYPE html>
-<script type="text/javascript"src="../lib/GitHub.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <html>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/underscore-min.js"></script>
+<script type="text/javascript" src="../lib/gh3.js"></script>
 	<head>
 	</head>
 	<body>
-	<p id="repo"></p>
+	<p id="user"></p>
 
 <script>
 $(document).ready(function(){
-	var github = new Github({
-  		username: "BigBearGCU",
-  		password: "scotland1980",
-  		auth: "basic"
-	});
 
-	if (github==null)
-	{
-		document.getElementById("repo").innerHTML="Error";
-	}
+var user = new Gh3.User("BigBearGCU");
+user.fetch(function (err, resUser){
 
-	var repo = github.getRepo("BigBearGCU", "GCU-GitHubViewer");
-	
-	if (repo==null)
-	{
-		document.getElementById("repo").innerHTML="Error";
-	}
+    if(err) {
+        throw "outch ..."
+    }
 
-	repo.show(function(err, repo) {
-			document.getElementById("repo").innerHTML="Hello World";	
-	});
-
-	document.getElementById("repo").innerHTML="Something went wrong";
-
+    console.log("Blog : ", resUser.blog); 
+    console.log("Name : ", resUser.name);
+    document.getElementById("user").innerHTML="Name : "+resUser.name;
 });
+});
+
 </script>	
 	</body>
 </html>
